@@ -2,7 +2,7 @@ default: &default
   adapter: postgresql
   encoding: unicode
   username: <%= ENV["POSTGRESQL_USER"] || ENV["USER"] || 'postgres' %>
-  database: <%= ENV["POSTGRESQL_DATABASE"] || 'mungazi_development' %>
+  database: <%= ENV["POSTGRESQL_DATABASE"] || 'croissant_development' %>
   password: <%= ENV["POSTGRESQL_PASSWORD"] %>
   host: <%= ENV["POSTGRESQL_HOST"] || 'localhost' %>
   pool: <%= ENV["POSTGRESQL_POOL"] || 5 %>
@@ -10,11 +10,11 @@ default: &default
 
 development:
   <<: *default
-  database: mungazi_development
+  database: croissant_development
 
 test:
   <<: *default
-  database: <%= ENV["JENKINS_DATABASE"] || 'mungazi_test' %>
+  database: <%= ENV["JENKINS_DATABASE"] || 'croissant_test' %>
 
 production:
   <<: *default
