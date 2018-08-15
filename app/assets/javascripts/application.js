@@ -11,5 +11,12 @@
 // about supported directives.
 //
 //= require rails-ujs
+//= require jquery
 //= require activestorage
-//= require_tree .
+//= require materialize
+//= require select2
+//= require_tree ./modules
+
+setTimeout(function() {
+  $('body').addClass('loaded');
+},100);

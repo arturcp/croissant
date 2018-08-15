@@ -2,6 +2,8 @@
 <html>
   <head>
     <title>Croissant</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +12,12 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'layouts/header' %>
+
+    <section>
+      <%= yield %>
+    </section>
+
+    <%= render 'layouts/loader' %>
   </body>
 </html>
