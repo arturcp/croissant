@@ -55,25 +55,31 @@ def create_verb_tenses(agent)
   # end
 end
 
-desc 'Import verbs from https://leconjugueur.lefigaro.fr/'
-task import_verbs: :environment do
+desc 'Import conjugations from https://leconjugueur.lefigaro.fr/'
+task import_conjugations: :environment do
   agent = Mechanize.new
   agent.agent.http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-  page = agent.get('https://leconjugueur.lefigaro.fr/conjugaison/verbe/dire.html')
-
-  # div = page.search("#Top")
-  #
-  # puts "Mode: #{div.children[3].text}"
-  # (0..7).each do |index|
-  #   puts "Temp: #{div.children[4 + index].children[0].text}"
-  # end
-  #
-  # div.children[4].children[1].to_s.split('<br>').each {|x| puts x.gsub('<p>','')}
-  # puts conjugation = div.children[4].children[1].text.split('<br>')
 
   puts ''
   puts ''
   puts ''
   save_modes(agent)
   create_verb_tenses(agent)
+end
+
+desc 'Import verbs from https://leconjugueur.lefigaro.fr/frlistedeverbe.php'
+task import_verbs: :environment do
+  agent = Mechanize.new
+  agent.agent.http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  page = agent.get('https://leconjugueur.lefigaro.fr/frlistedeverbe.php')
+  container = page.search('#pop')
+
+  parts = container.text.split("\n")
+  parts.each do |part|
+    if part.include?('-')
+      part.split(' - ').each do |verb|
+        Verb.find_or_create_by(verb: verb)
+      end
+    end
+  end
 end
