@@ -27,14 +27,24 @@ def create_verb_tenses(agent)
 
     if klass == 'verbe'
       verb = div.children[1].text.split(' ')
-      current_verb = Verb.find_or_create_by(name: verb)
+      current_verb = Verb.find_or_create_by(verb: verb)
     elsif klass == 'modeBloc'
       current_mode = TenseMode.find_by(name: div.text)
     elsif klass == 'conjugBloc'
-      conjugations = div.children[1].to_s.split('<br>')
-      # Conjugation.create!(
-      #
-      # )
+      verb_tense = div.children[0].children[0].to_s.gsub('<p>', '').gsub('</p>', '')
+      current_verb_tense = VerbTense.find_or_create_by(tense_mode: current_mode, tense: verb_tense)
+      conjugations = div.children[1].to_s.gsub('<p>', '').gsub('</p>', '').split('<br>')
+
+      Conjugation.create!(
+        verb: current_verb,
+        verb_tense: current_verb_tense,
+        je: conjugations[0],
+        tu: conjugations[1],
+        il: conjugations[2],
+        nous: conjugations[3],
+        vous: conjugations[4],
+        ils: conjugations[5]
+      )
     end
 
     index += 1

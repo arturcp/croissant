@@ -16,16 +16,16 @@ ActiveRecord::Schema.define(version: 2018_08_12_010136) do
   enable_extension "plpgsql"
 
   create_table "conjugations", force: :cascade do |t|
-    t.bigint "verbs_id"
-    t.bigint "verb_tenses_id"
+    t.bigint "verb_id"
+    t.bigint "verb_tense_id"
     t.string "je"
     t.string "tu"
     t.string "il"
     t.string "nous"
     t.string "vous"
     t.string "ils"
-    t.index ["verb_tenses_id"], name: "index_conjugations_on_verb_tenses_id"
-    t.index ["verbs_id"], name: "index_conjugations_on_verbs_id"
+    t.index ["verb_id"], name: "index_conjugations_on_verb_id"
+    t.index ["verb_tense_id"], name: "index_conjugations_on_verb_tense_id"
   end
 
   create_table "tense_modes", force: :cascade do |t|

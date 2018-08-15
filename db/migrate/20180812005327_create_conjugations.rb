@@ -1,8 +1,8 @@
 class CreateConjugations < ActiveRecord::Migration[5.2]
   def change
     create_table :conjugations do |t|
-      t.references :verbs
-      t.references :verb_tenses
+      t.references :verb
+      t.references :verb_tense
       t.string :je
       t.string :tu
       t.string :il
