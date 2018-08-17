@@ -7,7 +7,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'font-awesome-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
-gem 'materialize-sass', '~> 1.0.0.rc2'
+gem 'materialize-sass', '0.97.7'
 gem 'mechanize'
 gem 'pg'
 gem 'puma', '~> 3.11'
