@@ -19,8 +19,7 @@ nav .brand-logo {
 }
 
 .header-search-wrapper {
-  margin: 10px auto 0 105px;
-  width: calc(100% - 565px);
+  width: 72%;
   height: 40px;
   display: inline-block;
   position: relative;
@@ -57,16 +56,6 @@ input.header-search-input {
   border-radius: 3px;
 }
 
-#search-button {
-  position: absolute;
-  top: 12px;
-  right: 245px;
-
-  @media only screen and (max-width: 992px) {
-    right: 15px;
-  }
-}
-
 #search-options {
   width: 290px;
   position: absolute;
@@ -93,4 +82,5 @@ input.header-search-input {
   box-shadow: 3px 3px 20px #000;
   background-color: $card-background-color;
   color: $card-color;
+  margin-left: 85px;
 }
