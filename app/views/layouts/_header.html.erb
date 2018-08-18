@@ -2,28 +2,46 @@
   <div class="navbar-fixed">
     <nav class="navbar-color purple darken-4">
       <div class="nav-wrapper">
+        <div class="main-logo hide-on-small-only">
+          <h1 class="logo-wrapper">
+            <%= link_to root_path, { class: 'darken-1' } do %>
+              <%= image_tag 'logo.png' %>
+            <% end %>
+          </h1>
+        </div>
 
-        <ul class="left">
-          <li class="main-logo hide-on-med-and-down">
-            <h1 class="logo-wrapper">
-              <%= link_to root_path, { class: 'brand-logo darken-1' } do %>
-                <%= image_tag 'logo.png' %>
-              <% end %>
-            </h1>
+        <% if search_bar %>
+          <section>
+            <%= form_tag root_path do %>
+              <div class="header-search-wrapper">
+                <i class="material-icons">search</i>
+                <input type="text" name="query" class="header-search-input z-depth-2"
+                  placeholder="Pesquisar" id="search" value="<%= @query if @query %>">
+              </div>
+              <button class="btn dictionary-submit waves-effect waves-light" type="submit"
+                name="action" id="search-button">Buscar</button>
+            <% end %>
+          </section>
+        <% end %>
+
+        <ul class="right">
+          <li>
+            <%= link_to challenges_path do %>
+              <i class="fa fa-icon fa-handshake-o"></i> Challenge
+            <% end %>
+          </li>
+          <li>
+            <%= link_to conjugation_path do %>
+              <i class="fa fa-icon fa-bullhorn"></i> Conjugate
+            <% end %>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-icon fa-clone"></i> Compare
+            </a>
           </li>
         </ul>
 
-        <% if search_bar %>
-          <%= form_tag root_path do %>
-            <div class="header-search-wrapper">
-              <i class="material-icons">search</i>
-              <input type="text" name="query" class="header-search-input z-depth-2"
-                placeholder="Pesquisar" id="search" value="<%= @query if @query %>">
-            </div>
-            <button class="btn dictionary-submit waves-effect waves-light" type="submit"
-              name="action" id="search-button">Buscar</button>
-          <% end %>
-        <% end %>
       </div>
     </nav>
   </div>
