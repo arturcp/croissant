@@ -4,6 +4,20 @@
   img {
     width: 60px;
     height: 60px;
+
+    @media only screen and (max-width: 500px) {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  @media only screen and (max-width: 500px) {
+    line-height: 1 !important;
+
+    a {
+      display: block;
+      margin: -5px;
+    }
   }
 }
 
@@ -44,7 +58,6 @@ input.header-search-input {
   display: block;
   padding: 8px 8px 8px 72px;
   width: 100%;
-  background: rgba(255,255,255,0.3);
   height: 24px;
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
@@ -54,6 +67,8 @@ input.header-search-input {
   font-weight: 400;
   outline: none;
   border-radius: 3px;
+  background-color: #8061AD;
+  margin: 10px;
 }
 
 #search-options {
