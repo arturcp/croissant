@@ -63,3 +63,10 @@ input.search-input {
   color: $card-color;
   margin: 10px 0px 10px -15px;
 }
+
+.search-row {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  box-shadow: 7px 7px 7px #eee;
+}
