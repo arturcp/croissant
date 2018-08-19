@@ -1,5 +1,5 @@
 class ConjugationsController < ApplicationController
   def show
-    verb = params[:verb]
+    @verb = params[:verb]
   end
 end
