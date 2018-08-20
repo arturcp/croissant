@@ -8,8 +8,10 @@ def save_modes(agent)
   TenseMode.find_or_create_by(name: 'Gérondif')
 end
 
-def create_verb_tenses(agent)
-  page = agent.get('https://leconjugueur.lefigaro.fr/conjugaison/verbe/dire.html')
+def create_verb_tenses(agent, verb = '')
+  verb = I18n.transliterate(verb)
+  puts "Verb #{verb}"
+  page = agent.get("https://leconjugueur.lefigaro.fr/conjugaison/verbe/#{verb}.html")
   container = page.search('#Top')
 
   index = 0
@@ -23,36 +25,35 @@ def create_verb_tenses(agent)
 
     klass = div.attributes['class']&.value
     text = div.text
-    puts klass
 
     if klass == 'verbe'
-      verb = div.children[1].text.split(' ')
-      current_verb = Verb.find_or_create_by(verb: verb)
+      verb_name = div.children[1].text.split(' ')
+      current_verb = Verb.find_or_create_by(verb: verb_name)
     elsif klass == 'modeBloc'
       current_mode = TenseMode.find_by(name: div.text)
     elsif klass == 'conjugBloc'
-      verb_tense = div.children[0].children[0].to_s.gsub('<p>', '').gsub('</p>', '')
-      current_verb_tense = VerbTense.find_or_create_by(tense_mode: current_mode, tense: verb_tense)
-      conjugations = div.children[1].to_s.gsub('<p>', '').gsub('</p>', '').split('<br>')
+      content = div.children[0].children[0].to_s
+      unless content.blank?
+        verb_tense = content.gsub('<p>', '').gsub('</p>', '')
+        current_verb_tense = VerbTense.find_or_create_by(tense_mode: current_mode, tense: verb_tense)
+        conjugations = div.children[1].to_s.gsub('<p>', '').gsub('</p>', '').split('<br>')
 
-      Conjugation.create!(
-        verb: current_verb,
-        verb_tense: current_verb_tense,
-        je: conjugations[0],
-        tu: conjugations[1],
-        il: conjugations[2],
-        nous: conjugations[3],
-        vous: conjugations[4],
-        ils: conjugations[5]
-      )
+        Conjugation.create!(
+          verb: current_verb,
+          verb_tense: current_verb_tense,
+          je: conjugations[0],
+          tu: conjugations[1],
+          il: conjugations[2],
+          nous: conjugations[3],
+          vous: conjugations[4],
+          ils: conjugations[5]
+        )
+      end
+
     end
 
     index += 1
   end
-
-  # (0..7).each do |index|
-  #   puts "Temp: #{div.children[4 + index].children[0].text}"
-  # end
 end
 
 desc 'Import conjugations from https://leconjugueur.lefigaro.fr/'
@@ -60,11 +61,10 @@ task import_conjugations: :environment do
   agent = Mechanize.new
   agent.agent.http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-  puts ''
-  puts ''
-  puts ''
   save_modes(agent)
-  create_verb_tenses(agent)
+  Verb.all.each do |verb|
+    create_verb_tenses(agent, verb.verb)
+  end
 end
 
 desc 'Import verbs from https://leconjugueur.lefigaro.fr/frlistedeverbe.php'
@@ -82,4 +82,15 @@ task import_verbs: :environment do
       end
     end
   end
+end
+
+desc 'Import all verbs for all tenses and modes'
+task import_all: :environment do
+  Conjugation.delete_all
+  VerbTense.delete_all
+  TenseMode.delete_all
+  Verb.delete_all
+
+  tasks = %i(import_verbs import_conjugations)
+  tasks.each { |task| Rake::Task[task].execute }
 end
