@@ -1,0 +1,18 @@
+.challenge-accepted {
+  background: image-url('challenge_accepted.png');
+  background-size: 100px 100px;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.challenge-submit {
+  box-shadow: 3px 3px 20px #000;
+  background-color: $card-background-color;
+  color: $card-color;
+}
+
+.challenge-submit:hover {
+  background-color: $card-color;
+  color: $card-background-color;
+}

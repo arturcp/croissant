@@ -64,6 +64,11 @@ input.search-input {
   margin: 10px 0px 10px -15px;
 }
 
+.search-submit:hover {
+  background-color: $card-color;
+  color: $card-background-color;
+}
+
 .search-row {
   border-bottom: 1px solid #eee;
   padding-bottom: 10px;

@@ -1,14 +1,19 @@
 <div class="row">
-  <div class="col s12 m4">
-    <div class="card">
-      <div class="card-image">
-        <!-- <img src="images/sample-1.jpg"> -->
-        <span class="card-title">Card Title</span>
-        <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
-      </div>
-      <div class="card-content">
-        <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-      </div>
-    </div>
+  <div class="col s2 offset-s5 center-align">
+    <div class="challenge-accepted"></div>
+    <%= form_tag challenges_path, method: :post do %>
+      <button class="btn challenge-submit waves-effect waves-light" type="submit"
+        name="action" id="new-challenge">Try me</button>
+    <% end %>
   </div>
 </div>
+
+<% if @verb %>
+  <div class="row">
+    <div class="col s12">
+      <%= render 'shared/card', title: @verb.verb do %>
+      ...
+      <% end %>
+    </div>
+  </div>
+<% end %>
