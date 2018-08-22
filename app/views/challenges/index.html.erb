@@ -10,7 +10,7 @@
 
 <% if @verb %>
   <div class="row exercises-row">
-    <div class="col s12 m4 offset-m2">
+    <div class="col s12 l4 offset-l2">
       <%= render 'shared/card', title: 'Conjugate', action: :show_answers do %>
         <div>Verb <b><%= @verb.verb %></b>, on <%= @verb_tense.tense %></div>
 
@@ -24,7 +24,7 @@
       <% end %>
     </div>
 
-    <div class="col s12 m4">
+    <div class="col s12 l4">
       <%= render 'shared/card', title: 'Write a sentence' do %>
         <div>Verb <b><%= @verb.verb %></b>, on <%= @verb_tense.tense %></div>
         <div>Pronoun <b><%= @pronoun %></b></div>
