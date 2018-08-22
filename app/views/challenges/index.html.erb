@@ -12,7 +12,7 @@
   <div class="row exercises-row">
     <div class="col s12 l4 offset-l2">
       <%= render 'shared/card', title: 'Conjugate', action: :show_answers do %>
-        <div>Verb <b><%= @verb.verb %></b>, on <%= @verb_tense.tense %></div>
+        <div>Verb <b><%= @verb.verb %></b>, on <%= @verb_tense.tense_mode.name %> <%= @verb_tense.tense %></div>
 
         <% conjugation = conjugations_for(@verb, @verb_tense) %>
 
@@ -26,7 +26,7 @@
 
     <div class="col s12 l4">
       <%= render 'shared/card', title: 'Write a sentence' do %>
-        <div>Verb <b><%= @verb.verb %></b>, on <%= @verb_tense.tense %></div>
+        <div>Verb <b><%= @verb.verb %></b>, on <%= @verb_tense.tense_mode.name %> <%= @verb_tense.tense %></div>
         <div>Pronoun <b><%= @pronoun %></b></div>
 
         <textarea class="write-a-sentence"></textarea>
