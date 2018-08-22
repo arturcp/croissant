@@ -1,4 +1,8 @@
-<% parts = omit_verb(conjugation.send(pronoun)) %>
-<td><%= parts.visible_parts %></td>
-<td><input type="text" /></td>
-<td class="hide answer">(<%= parts.response %>)</td>
+<% conjugation_for_person = conjugation.send(pronoun) %>
+
+<% if conjugation_for_person %>
+  <% parts = omit_verb(conjugation_for_person) %>
+  <td><%= parts.visible_parts %></td>
+  <td><input type="text" /></td>
+  <td class="hide answer">(<%= parts.response %>)</td>
+<% end %>
