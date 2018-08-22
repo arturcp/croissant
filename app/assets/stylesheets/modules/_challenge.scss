@@ -16,3 +16,27 @@
   background-color: $card-color;
   color: $card-background-color;
 }
+
+.write-a-sentence {
+  height: 200px;
+}
+
+.conjugation-fields {
+  td {
+    padding: 0;
+  }
+
+  input {
+    margin-right: 5px;
+  }
+
+  .answer {
+    color: $danger-color;
+  }
+}
+
+.exercises-row {
+  a {
+    color: $danger-color !important;
+  }
+}
