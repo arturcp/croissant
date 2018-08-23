@@ -1,8 +1,7 @@
 <% conjugation_for_person = conjugation.send(pronoun) %>
 
 <% if conjugation_for_person %>
-  <% parts = omit_verb(conjugation_for_person) %>
-  <td><%= parts.visible_parts %></td>
+  <td>(<%= pronoun.capitalize %>)</td>
   <td><input type="text" /></td>
-  <td class="hide answer">(<%= parts.response %>)</td>
+  <td class="hide answer">(<%= strip_tags(conjugation_for_person) %>)</td>
 <% end %>
